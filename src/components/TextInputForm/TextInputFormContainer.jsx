@@ -35,14 +35,28 @@ function TextInputFormContainer() {
         
     }
 
-    useEffect(()=>{
-        console.log("Component Loaded"); // not called on updates
+    // If we are not passing any dependency array then the callback function will be executed every time the components are updated
+    // Dependency array khali mtlb -> koi bhi dependency nhi hai 
+    // NOTE -> FIRST LOAD PE SAARE USE EFFECTS CALL HONGE
 
-    });
+    // If passing an empty dependency array -> then the component will be called only the first time the component is loaded
+    useEffect(()=>{
+        console.log("Component first load"); // the callback is called the first time the component is called nd everytime it is rerendered
+
+    },[]);
 
     useEffect(()=>{
-        console.log("Component first Load nd update");
-    });
+        console.log("Component load and update");
+        // we are not passing any dependency array 
+    });// The callback will be only executed only when the component is mounted
+
+    useEffect(()=>{
+        console.log("Component first load and update value changed");
+    },[value]); // this will be updted only when the value state variable is updated
+
+    useEffect(()=>{
+        console.log("Component first load and Input type value changed");
+    },[inputType]);// this will be updted only when the inputType state variable is updated
 
     return (
         <TextInputForm 
